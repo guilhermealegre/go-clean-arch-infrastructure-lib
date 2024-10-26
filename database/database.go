@@ -3,14 +3,15 @@ package database
 import (
 	"fmt"
 
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/database/middlewares/tracer"
 
-	"github.com/gocraft/dbr/v2"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
 
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/config"
-	databaseConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/database/config"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/database/session"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
+	databaseConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/database/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
 )
 
 // Database has the database information
@@ -32,9 +33,9 @@ type Database struct {
 // database connections
 type database struct {
 	// DbRead read connection
-	DbRead *dbr.Session
+	DbRead session.ISession
 	// DbWrite write connection
-	DbWrite *dbr.Session
+	DbWrite session.ISession
 }
 
 const (
@@ -75,19 +76,19 @@ func (d *Database) Start() (err error) {
 	}
 
 	// tracer
-	//middleware := tracer.NewTracerMiddleware(d.app)
+	middleware := tracer.NewTracerMiddleware(d.app)
 
 	// master connection
-	if d.client.DbWrite, err = openConnection(d.config.Master, nil); err != nil {
+	if d.client.DbWrite, err = openConnection(d.config.Master, middleware); err != nil {
 		return err
 	}
 
 	// slave connection
-	if d.client.DbRead, err = openConnection(d.config.Slave, nil); err != nil {
+	if d.client.DbRead, err = openConnection(d.config.Slave, middleware); err != nil {
 		return err
 	}
 
-	migration := NewMigration(d.name, d.client.DbWrite.DB, d.config.Master.Driver, d.config.MigrationsDisabled)
+	migration := NewMigration(d.name, d.Write().DB(), d.config.Master.Driver, d.config.MigrationsDisabled)
 	if errs := migration.Run(); len(errs) > 0 {
 		for _, err = range errs {
 			message.ErrorMessage(d.name, err)
@@ -111,24 +112,27 @@ func (d *Database) ConfigFile() string {
 }
 
 // Read read connection
-func (d *Database) Read() *dbr.Session {
+func (d *Database) Read() session.ISession {
 	return d.client.DbRead
 }
 
 // Write write connection
-func (d *Database) Write() *dbr.Session {
+func (d *Database) Write() session.ISession {
 	return d.client.DbWrite
 }
 
 // openConnection open a new connection
-func openConnection(config *databaseConfig.Connection, eventReceiver dbr.EventReceiver) (*dbr.Session, error) {
+func openConnection(config *databaseConfig.Connection, eventReceiver dbr.EventReceiver) (*session.Session, error) {
 	conn, err := dbr.Open(
 		config.Driver,
-		fmt.Sprintf("postgres://%s:%s@localhost:%d/%s?sslmode=disable",
+		fmt.Sprintf(
+			"host=%s user=%s password=%s dbname=%s sslmode=disable port=%d",
+			config.Host,
 			config.User,
 			config.Password,
+			config.Database,
 			config.Port,
-			config.Database),
+		),
 		eventReceiver,
 	)
 
@@ -136,7 +140,7 @@ func openConnection(config *databaseConfig.Connection, eventReceiver dbr.EventRe
 		return nil, err
 	}
 
-	return conn.NewSession(eventReceiver), nil
+	return session.NewSession(conn, eventReceiver), nil
 }
 
 // Stop stops the database connection

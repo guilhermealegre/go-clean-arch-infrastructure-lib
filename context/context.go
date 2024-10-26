@@ -4,14 +4,14 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
+	"reflect"
 
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
 	"go.opentelemetry.io/otel/trace"
 
 	"google.golang.org/grpc/metadata"
 
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
-
-	msg "bitbucket.org/asadventure/be-core-lib/pagination"
+	msg "github.com/guilhermealegre/go-clean-arch-core-lib/pagination"
 
 	"github.com/gin-gonic/gin"
 )
@@ -52,6 +52,34 @@ func (c *Context) Response() gin.ResponseWriter {
 	return c.Context.Writer
 }
 
+func (c *Context) SetIdMarket(idMarket int) {
+	c.Context.Set(CtxIdMarket, idMarket)
+}
+
+func (c *Context) SetIdBu(idBu int) {
+	c.Context.Set(CtxIdBu, idBu)
+}
+
+func (c *Context) SetIdShop(idShop int) {
+	c.Context.Set(CtxIdShop, idShop)
+}
+
+func (c *Context) SetIdFascia(idFascia int) {
+	c.Context.Set(CtxIdFascia, idFascia)
+}
+
+func (c *Context) SetIdUserExternal(idUserExternal int) {
+	c.Context.Set(CtxIdUserExternal, idUserExternal)
+}
+
+func (c *Context) SetUsername(username string) {
+	c.Context.Set(CtxUsername, username)
+}
+
+func (c *Context) SetLanguageCode(languageCode string) {
+	c.Context.Set(CtxLanguageCode, languageCode)
+}
+
 func (c *Context) SetMethod(method string) {
 	c.Context.Set(CtxMethod, method)
 }
@@ -72,6 +100,48 @@ func (c *Context) SetParams(params map[string]any) {
 	c.Context.Set(CtxParams, params)
 }
 
+func (c *Context) getIntVal(key string) int {
+	val, ok := c.Context.Get(key)
+	if !ok {
+		return 0
+	}
+
+	//json unmarshals int numbers as float64, which is problematic in grpc requests
+	if reflect.ValueOf(val).Kind() == reflect.Float64 {
+		return int(val.(float64))
+	}
+
+	return val.(int)
+}
+
+func (c *Context) GetIdMarket() int {
+	return c.getIntVal(CtxIdMarket)
+}
+
+func (c *Context) GetIdBu() int {
+	return c.getIntVal(CtxIdBu)
+}
+
+func (c *Context) GetIdShop() int {
+	return c.getIntVal(CtxIdShop)
+}
+
+func (c *Context) GetIdFascia() int {
+	return c.getIntVal(CtxIdFascia)
+}
+
+func (c *Context) GetIdUserExternal() int {
+	return c.getIntVal(CtxIdUserExternal)
+}
+
+func (c *Context) GetUsername() string {
+	return c.Context.GetString(CtxUsername)
+}
+
+func (c *Context) GetLanguageCode() string {
+	return c.Context.GetString(CtxLanguageCode)
+}
+
 func (c *Context) GetBody() []byte {
 	body, exists := c.Context.Get(CtxBody)
 	if exists {
@@ -86,8 +156,20 @@ func (c *Context) GetParams() map[string]any {
 	return c.Context.GetStringMap(CtxParams)
 }
 
-func (c *Context) GetAuthorizations() []string {
-	return c.Context.GetStringSlice(CtxAuthorizations)
+func (c *Context) GetAuthorizations() (output []string) {
+	if val, ok := c.Context.Get(CtxAuthorizations); ok && val != nil {
+		switch v := val.(type) {
+		case []string:
+			output = v
+		case []interface{}:
+			for _, item := range v {
+				if str, ok := item.(string); ok {
+					output = append(output, str)
+				}
+			}
+		}
+	}
+	return output
 }
 
 func (c *Context) GetMethod() string {
@@ -98,12 +180,12 @@ func (c *Context) GetPath() string {
 	return c.Context.GetString(CtxPath)
 }
 
-func (c *Context) AddMeta(meta interface{}) domain.IContext {
+func (c *Context) AddMeta(meta interface{}) contextDomain.IContext {
 	c.meta = meta
 	return c
 }
 
-func (c *Context) AddPagination(pagination *msg.Pagination) domain.IContext {
+func (c *Context) AddPagination(pagination *msg.Pagination) contextDomain.IContext {
 	c.pagination = pagination
 	return c
 }
@@ -116,7 +198,7 @@ func (c *Context) GetPagination() *msg.Pagination {
 	return c.pagination
 }
 
-func (c *Context) FromGrpc(ctx context.Context) domain.IContext {
+func (c *Context) FromGrpc(ctx context.Context) contextDomain.IContext {
 	gCtx := &gin.Context{
 		Request: &http.Request{},
 	}
@@ -159,13 +241,4 @@ func (c *Context) RequestContext() context.Context {
 	}
 
 	return c
-}
-
-func (c *Context) GetUser() *domain.UserDetailJwt {
-	user, _ := c.Context.Get(CtxUser)
-	return user.(*domain.UserDetailJwt)
-}
-
-func (c *Context) SetUser(user *domain.UserDetailJwt) {
-	c.Context.Set(CtxUser, user)
 }

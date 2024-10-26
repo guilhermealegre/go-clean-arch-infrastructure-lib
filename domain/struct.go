@@ -3,10 +3,10 @@ package domain
 import (
 	"encoding/json"
 	"errors"
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
 
-	coreErrors "bitbucket.org/asadventure/be-core-lib/errors"
-	"bitbucket.org/asadventure/be-core-lib/response"
-	"github.com/go-playground/validator/v10"
+	coreErrors "github.com/guilhermealegre/go-clean-arch-core-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/response"
 )
 
 type DefaultController struct {
@@ -24,7 +24,7 @@ func (c *DefaultController) App() IApp {
 	return c.app
 }
 
-func (c *DefaultController) Json(ctx IContext, data interface{}, err ...error) {
+func (c *DefaultController) Json(ctx contextDomain.IContext, data interface{}, err ...error) {
 	ctx.Header("Content-Type", "application/json")
 	if len(err) > 0 &&
 		err[0] != nil &&
@@ -55,20 +55,12 @@ func (c *DefaultController) Json(ctx IContext, data interface{}, err ...error) {
 	}
 }
 
-type UserDetailJwt struct {
-	Id          int    `json:"id_user"`
-	FirstName   string `json:"first_name"`
-	LastName    string `json:"last_name"`
-	Email       string `json:"email"`
-	PhoneNumber string `json:"phone_number"`
-}
-
 type LoggerInfo struct {
-	Context  IContext         `json:"context"`
-	Level    coreErrors.Level `json:"level"`
-	Msg      string           `json:"msg"`
-	SubType  SubType          `json:"log"`
-	Response Response         `json:"response"`
+	Context  contextDomain.IContext `json:"context"`
+	Level    coreErrors.Level       `json:"level"`
+	Msg      string                 `json:"msg"`
+	SubType  SubType                `json:"log"`
+	Response Response               `json:"response"`
 }
 
 type Backend struct {

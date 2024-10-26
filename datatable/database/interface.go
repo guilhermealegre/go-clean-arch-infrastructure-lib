@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/url"
 
-	"bitbucket.org/asadventure/be-core-lib/pagination"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/pagination"
 )
 
 type IDatabase interface {
@@ -21,6 +21,7 @@ type IDatabase interface {
 	QueryBuilder(obj SearchQueryBuilder) IDatabase
 	SearchWithPagination() (data interface{}, result *SearchResult, pag *pagination.Pagination, err error)
 	Search() (data interface{}, result *SearchResult, err error)
+	Count() (count int64, err error)
 	Facets() (FacetDatabaseMap, error)
 	Path(path string) IDatabase
 }

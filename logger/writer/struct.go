@@ -1,6 +1,6 @@
 package writer
 
-import "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
+import "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
 
 type Fallback struct {
 	reader domain.FallbackReader

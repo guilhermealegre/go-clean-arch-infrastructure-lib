@@ -1,10 +1,9 @@
 package http
 
 import (
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain/auth"
 	"net/url"
 
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,8 +18,6 @@ type Endpoint struct {
 	method string
 	// Middleware
 	middlewares []gin.HandlerFunc
-	// authorizations
-	authorizations []string
 }
 
 // NewEndpoint creates a new endpoint
@@ -48,17 +45,8 @@ func (e *Endpoint) AddMiddlewares(middlewares domain.IMiddleware) {
 	e.middlewares = append(e.middlewares, middlewares.GetHandlers()...)
 }
 
-// RequireAuthorizations sets the route required authorizations
-func (e *Endpoint) RequireAuthorizations(authorizations ...string) *Endpoint {
-	e.authorizations = append(e.authorizations, authorizations...)
-	return e
-}
-
 // SetRoute sets a route with handle functions
 func (e *Endpoint) SetRoute(engine *gin.Engine, handlerFunc ...gin.HandlerFunc) {
-	if len(e.authorizations) > 0 {
-		e.middlewares = append(e.middlewares, auth.NewAuthorizationCheck(e.authorizations...))
-	}
 	e.middlewares = append(e.middlewares, handlerFunc...)
 	e.group.Init(&engine.RouterGroup).Handle(e.Method(), e.Path(), e.middlewares...)
 }

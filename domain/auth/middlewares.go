@@ -1,17 +1,17 @@
 package auth
 
 import (
-	"encoding/json"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
 	"net/http"
+	"reflect"
+	"strconv"
 	"time"
 
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
 
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/context"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/context"
 
-	"bitbucket.org/asadventure/be-core-lib/response"
 	"github.com/gin-gonic/gin"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/response"
 )
 
 func BuildAuthorizationHeader(ctx *gin.Context) {
@@ -49,7 +49,7 @@ func BuildAuthorizationHeader(ctx *gin.Context) {
 }
 
 func IncreaseActivityTTLInXMinutes(ctx *gin.Context) {
-	if ctx.Request.URL.Path == "/v1/auth/logoff" {
+	if ctx.Request.URL.Path == "/v1/user/logoff" {
 		return
 	}
 
@@ -115,22 +115,63 @@ func ValidateToken(ctx *gin.Context) {
 		return
 	}
 
-	user := &domain.UserDetailJwt{}
-	claimsBytes, err := json.Marshal(handler.Claims)
-	if err != nil {
-		ctx.JSON(http.StatusUnauthorized, response.ErrorUnauthorized.Formats(err))
-		ctx.Abort()
-		return
+	// set token useful claims to context
+	internalCtx.SetIdMarket(int(handler.Claims[ClaimIdMarket].(float64)))
+	internalCtx.SetIdBu(int(handler.Claims[ClaimIdBu].(float64)))
+	internalCtx.SetIdShop(int(handler.Claims[ClaimIdShop].(float64)))
+	internalCtx.SetIdFascia(int(handler.Claims[ClaimIdFascia].(float64)))
+	internalCtx.SetLanguageCode(handler.Claims[ClaimLanguageCode].(string))
+	internalCtx.SetIdUserExternal(int(handler.Claims[ClaimIdUserExternal].(float64)))
+	internalCtx.SetUsername(handler.Claims[ClaimUsername].(string))
+	authorizations := make([]string, 0)
+	if reflect.TypeOf(handler.Claims[ClaimAuthorizations]).Kind() == reflect.Slice &&
+		len(handler.Claims[ClaimAuthorizations].([]interface{})) > 0 {
+		for _, val := range handler.Claims[ClaimAuthorizations].([]interface{}) {
+			authorizations = append(authorizations, val.(string))
+		}
+	}
+	internalCtx.SetAuthorizations(authorizations)
+
+	ctx.Next()
+}
+
+func LoadShopParameters(ctx *gin.Context) {
+	internalCtx := context.NewContext(ctx)
+
+	if idMarket := ctx.Query(context.ParamIdMarket); idMarket != "" {
+		idMarketInt, err := strconv.Atoi(idMarket)
+		if err == nil && idMarketInt > 0 {
+			internalCtx.SetIdMarket(idMarketInt)
+		}
 	}
 
-	err = json.Unmarshal(claimsBytes, user)
-	if err != nil {
-		ctx.JSON(http.StatusUnauthorized, response.ErrorUnauthorized.Formats(err))
-		ctx.Abort()
-		return
+	if idBu := ctx.Query(context.ParamIdBu); idBu != "" {
+		idBuInt, err := strconv.Atoi(idBu)
+		if err == nil && idBuInt > 0 {
+			internalCtx.SetIdBu(idBuInt)
+		}
 	}
 
-	internalCtx.SetUser(user)
+	if idShop := ctx.Query(context.ParamIdShop); idShop != "" {
+		idShopInt, err := strconv.Atoi(idShop)
+		if err == nil && idShopInt > 0 {
+			internalCtx.SetIdShop(idShopInt)
+		}
+	}
+
+	if idFascia := ctx.Query(context.ParamIdFascia); idFascia != "" {
+		idFasciaInt, err := strconv.Atoi(idFascia)
+		if err == nil && idFasciaInt > 0 {
+			internalCtx.SetIdFascia(idFasciaInt)
+		}
+	}
+
+	if languageCode := ctx.Query(context.ParamLanguageCode); languageCode != "" {
+		if len(languageCode) > 0 {
+			internalCtx.SetLanguageCode(languageCode)
+		}
+
+	}
 
 	ctx.Next()
 }

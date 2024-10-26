@@ -5,11 +5,9 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
 
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/tracer"
-
-	"github.com/redis/go-redis/v9"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/tracer"
 )
 
 // tracerMiddleware

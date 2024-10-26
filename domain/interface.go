@@ -2,40 +2,36 @@ package domain
 
 import (
 	"context"
-	"github.com/gocraft/dbr/v2"
-	"io"
-	"mime/multipart"
-	"net/http"
-	"time"
-
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
 	"go.opentelemetry.io/otel/metric"
+	"io"
 
-	meterConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/meter/config"
+	meterConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/meter/config"
 
-	"bitbucket.org/asadventure/be-core-lib/errors"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	s3Config "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/s3/config"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/errors"
+	s3Config "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/s3/config"
 
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/datatable/database"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/datatable/elastic_search"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/datatable/database"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/datatable/elastic_search"
 
-	msg "bitbucket.org/asadventure/be-core-lib/pagination"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/database/session"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go/service/sqs"
-	"github.com/elastic/go-elasticsearch/v7"
 	"github.com/gin-gonic/gin"
-	"github.com/gin-gonic/gin/binding"
-	"github.com/go-playground/validator/v10"
-	appConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/app/config"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/database/config"
-	elasticSearchConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/elastic_search/config"
-	grpcConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/grpc/config"
-	httpConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/http/config"
-	loggerConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/logger/config"
-	rabbitmqConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/rabbitmq/config"
-	redisConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/redis/config"
-	tracerConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/tracer/config"
-	"github.com/redis/go-redis/v9"
+	msg "github.com/guilhermealegre/go-clean-arch-core-lib/pagination"
+	appConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/app/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/database/config"
+	elasticSearchConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/elastic_search/config"
+	grpcConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/grpc/config"
+	httpConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/http/config"
+	loggerConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/logger/config"
+	rabbitmqConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/rabbitmq/config"
+	redisConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/redis/config"
+	sqsConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/sqs/config"
+	stateMachineDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/state_machine/instance"
+	tracerConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/tracer/config"
 	"github.com/streadway/amqp"
 	"google.golang.org/grpc"
 )
@@ -48,6 +44,7 @@ type IApp interface {
 	Config() *appConfig.Config
 	// ConfigFile the configuration file
 	ConfigFile() string
+
 	// WithLogger sets the logger
 	WithLogger(logger ILogger) IApp
 	// Logger gets the logger
@@ -60,6 +57,10 @@ type IApp interface {
 	WithRabbitmq(rabbitmq IRabbitMQ) IApp
 	// Rabbitmq gets the rabbitmq
 	Rabbitmq() IRabbitMQ
+	// WithSQS sets the sqs
+	WithSQS(sqs ISQS) IApp
+	// SQS gets the sqs
+	SQS() ISQS
 	// WithRedis sets the redis
 	WithRedis(redis IRedis) IApp
 	// Redis gets the redis
@@ -100,8 +101,10 @@ type IApp interface {
 	WithS3(s3 IS3) IApp
 	// S3 gets the s3 Connection
 	S3() IS3
+	// WithStateMachine sets the state machine
+	WithStateMachine(stateMachine stateMachineDomain.IStateMachineService) IApp
 	// StateMachine gets the state machine service
-	StateMachine() IStateMachineService
+	StateMachine() stateMachineDomain.IStateMachineService
 	// WithAdditionalConfigType sets an additional config type
 	WithAdditionalConfigType(obj interface{}) IApp
 }
@@ -128,8 +131,8 @@ type IMiddleware interface {
 type IController interface {
 	App() IApp
 	Register()
-	Json(ctx IContext, data interface{}, err ...error)
-	JsonWithPagination(ctx IContext, data interface{}, pagination *msg.Pagination, err ...error)
+	Json(ctx contextDomain.IContext, data interface{}, err ...error)
+	JsonWithPagination(ctx contextDomain.IContext, data interface{}, pagination *msg.Pagination, err ...error)
 }
 
 // IHttp the interface for the http service
@@ -154,14 +157,19 @@ type IHttp interface {
 // ILogger logger service interface
 type ILogger interface {
 	IService
+
 	// ConfigFile gets the configuration file
 	ConfigFile() string
 	// Config gets the configurations
 	Config() *loggerConfig.Config
+
 	//Log the error
 	Log() ILogging
+
 	// Database Log
 	DBLog(error) error
+	// SQS Log
+	SQSLog(error) error
 	//Elastic Log
 	ElasticLog(error) error
 	//Redis Log
@@ -178,9 +186,9 @@ type IDatabase interface {
 	Config() *config.Config
 
 	// Read the read connection
-	Read() *dbr.Session
+	Read() session.ISession
 	// Write the write connection
-	Write() *dbr.Session
+	Write() session.ISession
 }
 
 // IElasticSearch elastic search service interface
@@ -208,6 +216,31 @@ type IRabbitMQ interface {
 	Consume(app IApp, queues string, handlers map[string]func(msg amqp.Delivery) bool)
 	// WithConsumer adds a consumer to the rabbitmq
 	WithConsumer(consumer IRabbitMQConsumer) IRabbitMQ
+}
+
+// ISQS sqs service interface
+type ISQS interface {
+	IService
+
+	// WithAdditionalConfigType sets an additional config type
+	WithAdditionalConfigType(obj interface{}) ISQS
+	// ConfigFile gets the configuration file
+	ConfigFile() string
+	// Config gets the configurations
+	Config() *sqsConfig.Config
+	// WithConsumer adds a consumer to the rabbitmq
+	WithConsumer(consumer ISQSConsumer) ISQS
+	// Connection
+	Connection(name string) ISQSConnection
+}
+
+type ISQSConnection interface {
+	// Connect connect
+	Connect() error
+	// Produce produces to the sqs
+	Produce(ctx context.Context, queue string, messageAttributes map[string]*sqs.MessageAttributeValue, messages ...string) error
+	// Consume consumes from the sqs
+	Consume(maskedQueue string, consumer ISQSConsumer)
 }
 
 // IS3 s3 service interface
@@ -298,7 +331,7 @@ type IValidator interface {
 	// AddStructValidators adds a custom struct validator
 	AddStructValidators(v ...IStructValidator) IValidator
 	// Validate validates the struct
-	Validate(ctx IContext, v any) error
+	Validate(ctx contextDomain.IContext, v any) error
 }
 
 type IFieldValidator interface {
@@ -344,110 +377,12 @@ type IMeter interface {
 	Prometheus() metric.Meter
 }
 
-// IStateMachineService interface
-type IStateMachineService interface {
-	IService
-}
-
 // IStateMachine interface
 type IStateMachine interface {
 	GetName() string
-}
-
-// IContext interface
-type IContext interface {
-	context.Context
-	FullPath() string
-	Next()
-	Set(key string, value any)
-	Get(key string) (value any, exists bool)
-	MustGet(key string) any
-	GetString(key string) (s string)
-	GetBool(key string) (b bool)
-	GetInt(key string) (i int)
-	GetInt64(key string) (i64 int64)
-	GetUint(key string) (ui uint)
-	GetUint64(key string) (ui64 uint64)
-	GetFloat64(key string) (f64 float64)
-	GetTime(key string) (t time.Time)
-	GetDuration(key string) (d time.Duration)
-	GetStringSlice(key string) (ss []string)
-	GetStringMap(key string) (sm map[string]any)
-	GetStringMapString(key string) (sms map[string]string)
-	GetStringMapStringSlice(key string) (smss map[string][]string)
-	Param(key string) string
-	AddParam(key, value string)
-	Query(key string) (value string)
-	DefaultQuery(key, defaultValue string) string
-	GetQuery(key string) (string, bool)
-	QueryArray(key string) (values []string)
-	GetQueryArray(key string) (values []string, ok bool)
-	QueryMap(key string) (dicts map[string]string)
-	GetQueryMap(key string) (map[string]string, bool)
-	PostForm(key string) (value string)
-	DefaultPostForm(key, defaultValue string) string
-	GetPostForm(key string) (string, bool)
-	PostFormArray(key string) (values []string)
-	GetPostFormArray(key string) (values []string, ok bool)
-	PostFormMap(key string) (dicts map[string]string)
-	GetPostFormMap(key string) (map[string]string, bool)
-	FormFile(name string) (*multipart.FileHeader, error)
-	MultipartForm() (*multipart.Form, error)
-	SaveUploadedFile(file *multipart.FileHeader, dst string) error
-	Bind(obj any) error
-	BindJSON(obj any) error
-	BindQuery(obj any) error
-	BindHeader(obj any) error
-	BindUri(obj any) error
-	MustBindWith(obj any, b binding.Binding) error
-	ShouldBind(obj any) error
-	ShouldBindJSON(obj any) error
-	ShouldBindQuery(obj any) error
-	ShouldBindHeader(obj any) error
-	ShouldBindUri(obj any) error
-	ShouldBindWith(obj any, b binding.Binding) error
-	ShouldBindBodyWith(obj any, bb binding.BindingBody) (err error)
-	ClientIP() string
-	RemoteIP() string
-	ContentType() string
-	Status(code int)
-	Header(key, value string)
-	GetHeader(key string) string
-	GetRawData() ([]byte, error)
-	SetCookie(name, value string, maxAge int, path, domain string, secure, httpOnly bool)
-	SetSameSite(http.SameSite)
-	Cookie(name string) (string, error)
-	IndentedJSON(code int, obj any)
-	JSONP(code int, obj any)
-	JSON(code int, obj any)
-	String(code int, format string, values ...any)
-	Redirect(code int, location string)
-	Data(code int, contentType string, data []byte)
-	DataFromReader(code int, contentLength int64, contentType string, reader io.Reader, extraHeaders map[string]string)
-	File(filepath string)
-	FileFromFS(filepath string, fs http.FileSystem)
-	FileAttachment(filepath, filename string)
-	Stream(step func(w io.Writer) bool) bool
-	SetAccepted(formats ...string)
-	Values(key any) any
-	Params() gin.Params
-	Keys() map[string]any
-	Request() *http.Request
-	Response() gin.ResponseWriter
-	SetBody([]byte)
-	SetAuthorizations([]string)
-	GetBody() []byte
-	GetAuthorizations() []string
-	Abort()
-	AddMeta(meta any) IContext
-	AddPagination(pagination *msg.Pagination) IContext
-	GetMeta() any
-	GetPagination() *msg.Pagination
-	FromGrpc(ctx context.Context) IContext
-	ToGrpc() context.Context
-	RequestContext() context.Context
-	SetUser(user *UserDetailJwt)
-	GetUser() *UserDetailJwt
+	GetStateMachine() stateMachineDomain.IStateMachine
+	SetHandlers()
+	AddStateMachineTrigger(stateMachine IStateMachine)
 }
 
 // IDatatable datatable service interface

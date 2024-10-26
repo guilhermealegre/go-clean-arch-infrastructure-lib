@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"bitbucket.org/asadventure/be-core-lib/response"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/response"
 )
 
 func LogOff(ctx *gin.Context) {

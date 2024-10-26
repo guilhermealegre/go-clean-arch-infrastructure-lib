@@ -1,9 +1,9 @@
 package database
 
 import (
-	"github.com/gocraft/dbr/v2"
-	databaseConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/database/config"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/database/session"
+	databaseConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/database/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
 	"github.com/stretchr/testify/mock"
 )
 
@@ -43,20 +43,20 @@ func (d *DatabaseMock) Config() *databaseConfig.Config {
 	return args.Get(0).(*databaseConfig.Config)
 }
 
-func (d *DatabaseMock) Read() *dbr.Session {
+func (d *DatabaseMock) Read() session.ISession {
 	args := d.Called()
 	if args.Get(0) == nil {
 		return nil
 	}
-	return args.Get(0).(*dbr.Session)
+	return args.Get(0).(session.ISession)
 }
 
-func (d *DatabaseMock) Write() *dbr.Session {
+func (d *DatabaseMock) Write() session.ISession {
 	args := d.Called()
 	if args.Get(0) == nil {
 		return nil
 	}
-	return args.Get(0).(*dbr.Session)
+	return args.Get(0).(session.ISession)
 }
 
 // WithAdditionalConfigType sets an additional config type

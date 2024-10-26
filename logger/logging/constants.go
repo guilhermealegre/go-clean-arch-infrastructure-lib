@@ -10,6 +10,7 @@ const (
 	OutputConsole = "console"
 	OutputFile    = "file"
 	OutputRabbit  = "rabbit"
+	OutputSQS     = "sqs"
 )
 
 // Types

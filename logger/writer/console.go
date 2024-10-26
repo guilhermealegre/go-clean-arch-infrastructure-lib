@@ -8,7 +8,7 @@ import (
 
 	"github.com/rs/zerolog"
 
-	errorCodes "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/errors"
+	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
 )
 
 // File

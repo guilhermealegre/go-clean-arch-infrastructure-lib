@@ -3,7 +3,7 @@ package tracer
 import (
 	"context"
 
-	tracerConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/tracer/config"
+	tracerConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/tracer/config"
 	"github.com/stretchr/testify/mock"
 )
 

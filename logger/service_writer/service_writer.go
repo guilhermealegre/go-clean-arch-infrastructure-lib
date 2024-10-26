@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"io"
 
-	loggerWriter "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/logger/writer"
+	loggerWriter "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/logger/writer"
 )
 
 const (

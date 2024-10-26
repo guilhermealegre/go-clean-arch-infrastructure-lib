@@ -1,7 +1,8 @@
 package validator
 
 import (
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
 	"github.com/stretchr/testify/mock"
 )
 
@@ -44,7 +45,7 @@ func (v *ValidatorMock) AddStructValidators(val ...domain.IStructValidator) doma
 	return args.Get(0).(domain.IValidator)
 }
 
-func (v *ValidatorMock) Validate(ctx domain.IContext, val any) error {
+func (v *ValidatorMock) Validate(ctx contextDomain.IContext, val any) error {
 	args := v.Called(ctx, val)
 	return args.Error(0)
 }

@@ -3,7 +3,7 @@ package config
 // Config rabbitmq configurations
 type Config struct {
 	// User
-	User string `yaml:"auth"`
+	User string `yaml:"user"`
 	// Password
 	Password string `yaml:"password"`
 	// Host

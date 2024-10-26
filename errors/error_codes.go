@@ -1,8 +1,8 @@
 package errors
 
 import (
-	"bitbucket.org/asadventure/be-core-lib/errors"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/errors/config"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors/config"
 )
 
 // Error codes
@@ -15,8 +15,8 @@ var (
 	ErrorInRabbitMQConsumer                  = config.GetError("INFRA-6", "RabbitMQ Consumer Recovered from Panic:  Exchange: %s, Routing Key: %s, Message: %s", errors.Error)
 	ErrorInSQSConsumer                       = config.GetError("INFRA-7", "SQS Consumer Recovered from Panic: Queue: %s, Message Attributes: %s, Message: %s", errors.Error)
 	ErrorInStateMachineUnimplementedCallback = config.GetError("INFRA-8", "The event [%s] for callback %s is not implemented", errors.Error)
-	ErrorInStateMachineTransition            = config.GetError("INFRA-9", "Error while checking the transition from status[%d] to status[%d] [%s]", errors.Error)
-	ErrorInStateMachineInvalidTransition     = config.GetError("INFRA-10", "Invalid transition from status [%s] to [%s] for auth [%s]", errors.Error)
+	ErrorInStateMachineTransition            = config.GetError("INFRA-9", "Error while checking the transition from status[%s] to status[%s] [%s]", errors.Error)
+	ErrorInStateMachineInvalidTransition     = config.GetError("INFRA-10", "Invalid transition from status [%s] to [%s] for user [%s]", errors.Error)
 	ErrorInStateMachineNotFound              = config.GetError("INFRA-11", "state machine [%s] not found", errors.Error)
 	ErrorInGrpcClientNotFound                = config.GetError("INFRA-12", "client [%s] not found", errors.Error)
 	ErrorInvalidInputFields                  = config.GetError("INFRA-13", "Key: '%s' Error:Field validation for '%s' failed on the '%s' tag", errors.Info)

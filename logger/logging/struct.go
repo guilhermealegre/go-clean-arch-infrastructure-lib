@@ -5,8 +5,8 @@ import (
 
 	"github.com/rs/zerolog"
 
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/logger/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/logger/config"
 )
 
 // Default
@@ -27,6 +27,8 @@ type Logging struct {
 	config config.Config
 	// Rabbitmq
 	RabbitMq domain.IRabbitMQ
+	// SQS
+	SQS domain.ISQS
 	// App Name
 	AppName string
 	// Writers

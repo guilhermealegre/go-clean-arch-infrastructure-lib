@@ -8,15 +8,15 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
 
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
 
 	"github.com/gin-gonic/gin"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/config"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/errors"
-	httpConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/http/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	httpConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/http/config"
 )
 
 // Http service

@@ -16,6 +16,8 @@ type Config struct {
 	Output []string `yaml:"output"`
 	// Rabbitmq Config
 	Rabbitmq *RabbitmqConfig `yaml:"rabbitmq"`
+	// SQS Config
+	SQS *SQSConfig `yaml:"sqs"`
 	// Body
 	Body bool `yaml:"body"`
 	// Body Exclude Uris

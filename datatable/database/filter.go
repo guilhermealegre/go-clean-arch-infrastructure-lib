@@ -3,10 +3,11 @@ package database
 import (
 	"context"
 	"fmt"
-	"github.com/gocraft/dbr/v2"
+
+	"github.com/guilhermealegre/go-clean-arch-core-lib/database/session"
 )
 
-func (f *FilterDatabase) getFacetData(client *dbr.Session, ctx context.Context, bindObject string) (FacetDatabaseList, error) {
+func (f *FilterDatabase) getFacetData(client session.ISession, ctx context.Context, bindObject string) (FacetDatabaseList, error) {
 	var err error
 	facet := f.loadCachedFacet(bindObject)
 	if len(facet) == 0 {
@@ -46,7 +47,7 @@ func (f *FilterDatabase) saveCacheFacet(facet FacetDatabaseList, bindObject stri
 	cachedFacetDatabase[f.FilterName][bindObject] = facet
 }
 
-func (f *FilterDatabase) loadFacetFromDb(client *dbr.Session, ctx context.Context) (FacetDatabaseList, error) {
+func (f *FilterDatabase) loadFacetFromDb(client session.ISession, ctx context.Context) (FacetDatabaseList, error) {
 	facet := FacetDatabaseList{}
 	builder := client.
 		Select(f.ShowFields...).

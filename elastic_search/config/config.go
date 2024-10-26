@@ -7,7 +7,7 @@ type Config struct {
 	// Port
 	Port int `yaml:"port"`
 	// User
-	User string `yaml:"auth"`
+	User string `yaml:"user"`
 	// Password
 	Password string `yaml:"password"`
 	// Additional Config

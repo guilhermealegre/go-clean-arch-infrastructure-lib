@@ -1,9 +1,9 @@
 package validator
 
 import (
-	"github.com/go-playground/validator/v10"
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
 
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
 )
 
 // Validator
@@ -85,7 +85,7 @@ func (v *Validator) AddStructValidators(sv ...domain.IStructValidator) domain.IV
 }
 
 // Validate validates a struct
-func (v *Validator) Validate(ctx domain.IContext, obj any) error {
+func (v *Validator) Validate(ctx contextDomain.IContext, obj any) error {
 	return v.validator.StructCtx(ctx.RequestContext(), obj)
 }
 

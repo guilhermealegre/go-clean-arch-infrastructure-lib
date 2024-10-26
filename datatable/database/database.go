@@ -10,11 +10,11 @@ import (
 	"strconv"
 	"strings"
 
-	"bitbucket.org/asadventure/be-core-lib/pagination"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/pagination"
 
-	"github.com/gocraft/dbr/v2"
 	"github.com/gocraft/dbr/v2/dialect"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/database/session"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
 )
 
 type Database struct {
@@ -150,24 +150,10 @@ func (d *Database) SearchWithPagination() (data interface{}, result *SearchResul
 
 func (d *Database) Search() (data interface{}, _ *SearchResult, err error) {
 	result := &SearchResult{}
-	if !d.validateSearchableColumns() {
-		return nil, nil, errors.ErrorDatatableSearchableColumn()
-	}
 
-	if !d.validateFilters() {
-		return nil, nil, errors.ErrorDatatableFields()
+	if err = d.prepare(); err != nil {
+		return nil, nil, err
 	}
-
-	if !d.validateGroupColumn() {
-		return nil, nil, errors.ErrorDatatableGroup()
-	}
-
-	d.initializeEngine().
-		prepareContext().
-		prepareParams().
-		prepareBuilder().
-		prepareSearch().
-		prepareFilters()
 
 	// calculate countTotal
 	countTotal, err := d.doCountTotal()
@@ -243,7 +229,7 @@ func (d *Database) Facets() (_ FacetDatabaseMap, err error) {
 					label = filter.NullLabel
 				}
 
-				aux = append(aux, FacetDatabase{0, label})
+				aux = append(aux, FacetDatabase{Id: 0, Key: label, Name: label})
 				facet = append(aux, facet...)
 			}
 
@@ -296,6 +282,38 @@ func (d *Database) doCountTotal() (int64, error) {
 	}
 
 	return countTotal, nil
+}
+
+func (d *Database) Count() (int64, error) {
+	if err := d.prepare(); err != nil {
+		return 0, err
+	}
+
+	count, err := d.doCountTotal()
+	if err != nil {
+		return 0, d.logger(err)
+	}
+
+	return count, nil
+}
+
+func (d *Database) prepare() error {
+	if !d.validateSearchableColumns() {
+		return errors.ErrorDatatableSearchableColumn()
+	}
+	if !d.validateFilters() {
+		return errors.ErrorDatatableFields()
+	}
+	if !d.validateGroupColumn() {
+		return errors.ErrorDatatableGroup()
+	}
+	d.initializeEngine().
+		prepareContext().
+		prepareParams().
+		prepareBuilder().
+		prepareSearch().
+		prepareFilters()
+	return nil
 }
 
 func (d *Database) validateSearchableColumns() bool {
@@ -490,7 +508,7 @@ func (d *Database) prepareFilters() *Database {
 	return d
 }
 
-func (d *Database) getClient() *dbr.Session {
+func (d *Database) getClient() session.ISession {
 	if d.isMaster {
 		return d.client.Writer
 	}

@@ -2,8 +2,8 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
-	httpConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/http/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	httpConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/http/config"
 	"github.com/stretchr/testify/mock"
 )
 

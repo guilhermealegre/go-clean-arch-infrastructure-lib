@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/url"
 
-	"github.com/gocraft/dbr/v2"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/database/session"
 )
 
 type DatabaseSearch struct {
@@ -25,8 +25,8 @@ type DatabaseSearch struct {
 }
 
 type Client struct {
-	Reader *dbr.Session
-	Writer *dbr.Session
+	Reader session.ISession
+	Writer session.ISession
 }
 
 type joinType uint8
@@ -42,13 +42,13 @@ type SearchResult struct {
 type FilterDatabaseList []FilterDatabase
 type FilterDatabase struct {
 	FilterName        string                 // [required] filter name
-	Table             string                 // [required] table name
+	Table             interface{}            // [required] table name
 	ShowFields        []string               // [required] fields to show on the filter list
 	FilterField       string                 // [required] filter by column name
 	Join              FilterJoinDatabaseList // [optional] join with other table
 	NullLabel         string                 // [optional] set null label default value as None
 	NullValue         bool                   // [optional] set filter default value as null
-	Exceptions        []string               // [optional] exceptions, e.g: ignore specific record
+	Exceptions        []interface{}          // [optional] exceptions, e.g: ignore specific record
 	StringId          bool                   // [optional] when filter is made by a string
 	ArrayId           bool                   // [optional] when filter is made by an array
 	DisabledFacetLoad bool
@@ -76,7 +76,8 @@ type FacetDatabaseList []FacetDatabase
 type FacetDatabaseMap map[string]FacetDatabaseList
 type FacetDatabase struct {
 	Id   interface{} `json:"id"`
-	Name string      `json:"name"`
+	Key  string      `json:"key,omitempty"`
+	Name string      `json:"name,omitempty"`
 }
 
 type SpecialFiltersDatabaseList []SpecialFiltersDatabase

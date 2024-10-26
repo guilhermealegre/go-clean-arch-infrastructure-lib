@@ -2,29 +2,33 @@ package app
 
 import (
 	"fmt"
+	instanceStateMachine "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/state_machine/instance"
 	"os"
 	"os/signal"
 	"syscall"
 
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
 
-	errorCodes "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/errors"
+	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
 
-	appConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/app/config"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/config"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
+	appConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/app/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
 )
 
 // App keeps all the tools that the lib handles
 type App struct {
 	// Configuration
 	config *appConfig.Config
+
 	// Logger
 	logger domain.ILogger
 	// Database
 	database domain.IDatabase
 	// Rabbitmq
 	rabbitmq domain.IRabbitMQ
+	// SQS
+	sqs domain.ISQS
 	// Redis
 	redis domain.IRedis
 	// ElasticSearch
@@ -46,7 +50,7 @@ type App struct {
 	// Datatable
 	datatable domain.IDatatable
 	// State Machine
-	stateMachine domain.IStateMachineService
+	stateMachine instanceStateMachine.IStateMachineService
 	// Services
 	services []domain.IService
 	// Additional Config Type
@@ -164,6 +168,18 @@ func (a *App) WithRabbitmq(rabbitmq domain.IRabbitMQ) domain.IApp {
 // Rabbitmq gets the rabbitmq service
 func (a *App) Rabbitmq() domain.IRabbitMQ {
 	return a.rabbitmq
+}
+
+// WithSQS sets the sqs service
+func (a *App) WithSQS(sqs domain.ISQS) domain.IApp {
+	a.addService(sqs)
+	a.sqs = sqs
+	return a
+}
+
+// SQS gets the sqs service
+func (a *App) SQS() domain.ISQS {
+	return a.sqs
 }
 
 // WithRedis sets the redis service
@@ -285,11 +301,15 @@ func (a *App) Datatable() domain.IDatatable {
 	return a.datatable
 }
 
+// WithDatatable sets the datatable
+func (a *App) WithStateMachine(stateMachine instanceStateMachine.IStateMachineService) domain.IApp {
+	a.addService(stateMachine)
+	a.stateMachine = stateMachine
+	return a
+}
+
 // StateMachine gets the state machine service
-func (a *App) StateMachine() domain.IStateMachineService {
-	if a.stateMachine == nil {
-		a.addService(a.stateMachine)
-	}
+func (a *App) StateMachine() instanceStateMachine.IStateMachineService {
 	return a.stateMachine
 }
 

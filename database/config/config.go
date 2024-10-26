@@ -21,7 +21,7 @@ type Connection struct {
 	// Host
 	Host string `yaml:"host"`
 	// User
-	User string `yaml:"auth"`
+	User string `yaml:"user"`
 	// Password
 	Password string `yaml:"password"`
 	// Port

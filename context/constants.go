@@ -1,16 +1,24 @@
 package context
 
 const (
-	CtxIdUser         = "id_user"
-	CtxUser           = "user"
-	CtxFirstName      = "first_name"
-	CtxLastName       = "last_name"
-	CtxEmail          = "email"
-	CtxPhoneNumber    = "phone_number"
+	ParamIdMarket     = "idMarket"
+	ParamIdShop       = "idShop"
+	ParamIdBu         = "idBu"
+	ParamIdFascia     = "idFascia"
+	ParamLanguageCode = "languageCode"
+
+	CtxIdMarket       = "idMarket"
+	CtxIdShop         = "idShop"
+	CtxIdBu           = "idBu"
+	CtxIdFascia       = "idFascia"
+	CtxIdUserExternal = "idUserExternal"
+	CtxUsername       = "username"
+	CtxLanguageCode   = "languageCode"
 	CtxBody           = "body"
 	CtxAuthorizations = "authorizations"
 	CtxMethod         = "method"
 	CtxPath           = "path"
 	CtxParams         = "params"
-	ContextGrpcKeys   = "keys"
+
+	ContextGrpcKeys = "keys"
 )

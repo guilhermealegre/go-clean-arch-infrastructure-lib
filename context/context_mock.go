@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"time"
 
-	msg "bitbucket.org/asadventure/be-core-lib/pagination"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
+	msg "github.com/guilhermealegre/go-clean-arch-core-lib/pagination"
 	"github.com/stretchr/testify/mock"
 )
 
@@ -470,15 +470,51 @@ func (c *ContextMock) SetSameSite(site http.SameSite) {
 	c.Called(site)
 }
 
-func (c *ContextMock) SetIdUser(i int) {
+func (c *ContextMock) SetIdMarket(i int) {
 	c.Called(i)
 }
 
-func (c *ContextMock) SetFirstName(s string) {
+func (c *ContextMock) SetIdBu(i int) {
+	c.Called(i)
+}
+
+func (c *ContextMock) SetIdShop(i int) {
+	c.Called(i)
+}
+
+func (c *ContextMock) SetIdFascia(i int) {
+	c.Called(i)
+}
+
+func (c *ContextMock) GetIdMarket() int {
+	args := c.Called()
+	return args.Get(0).(int)
+}
+
+func (c *ContextMock) GetIdBu() int {
+	args := c.Called()
+	return args.Get(0).(int)
+}
+
+func (c *ContextMock) GetIdShop() int {
+	args := c.Called()
+	return args.Get(0).(int)
+}
+
+func (c *ContextMock) GetIdFascia() int {
+	args := c.Called()
+	return args.Get(0).(int)
+}
+
+func (c *ContextMock) SetIdUserExternal(i int) {
+	c.Called(i)
+}
+
+func (c *ContextMock) SetUsername(s string) {
 	c.Called(s)
 }
 
-func (c *ContextMock) SetLastName(s string) {
+func (c *ContextMock) SetLanguageCode(s string) {
 	c.Called(s)
 }
 
@@ -490,17 +526,17 @@ func (c *ContextMock) SetAuthorizations(s []string) {
 	c.Called(s)
 }
 
-func (c *ContextMock) GetIdUser() int {
+func (c *ContextMock) GetIdUserExternal() int {
 	args := c.Called()
 	return args.Get(0).(int)
 }
 
-func (c *ContextMock) GetFirstName() string {
+func (c *ContextMock) GetUsername() string {
 	args := c.Called()
 	return args.Get(0).(string)
 }
 
-func (c *ContextMock) GetLastName() string {
+func (c *ContextMock) GetLanguageCode() string {
 	args := c.Called()
 	return args.Get(0).(string)
 }
@@ -521,14 +557,20 @@ func (c *ContextMock) GetAuthorizations() []string {
 	return args.Get(0).([]string)
 }
 
-func (c *ContextMock) AddMeta(meta interface{}) domain.IContext {
+func (c *ContextMock) AddMeta(meta interface{}) contextDomain.IContext {
 	args := c.Called(meta)
-	return args.Get(0).(domain.IContext)
+	if args.Get(0) == nil {
+		return nil
+	}
+	return args.Get(0).(contextDomain.IContext)
 }
 
-func (c *ContextMock) AddPagination(pagination *msg.Pagination) domain.IContext {
+func (c *ContextMock) AddPagination(pagination *msg.Pagination) contextDomain.IContext {
 	args := c.Called(pagination)
-	return args.Get(0).(domain.IContext)
+	if args.Get(0) == nil {
+		return nil
+	}
+	return args.Get(0).(contextDomain.IContext)
 }
 
 func (c *ContextMock) GetMeta() any {
@@ -545,12 +587,12 @@ func (c *ContextMock) Abort() {
 	_ = c.Called()
 }
 
-func (c *ContextMock) FromGrpc(ctx context.Context) domain.IContext {
+func (c *ContextMock) FromGrpc(ctx context.Context) contextDomain.IContext {
 	args := c.Called(ctx)
 	if args.Get(0) == nil {
 		return nil
 	}
-	return args.Get(0).(domain.IContext)
+	return args.Get(0).(contextDomain.IContext)
 }
 
 func (c *ContextMock) ToGrpc() context.Context {

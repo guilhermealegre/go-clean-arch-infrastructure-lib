@@ -1,14 +1,13 @@
 package auth
 
 import (
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
 	"net/http"
 	"strings"
 	"time"
 
-	"bitbucket.org/asadventure/be-core-lib/helpers"
-	"github.com/dgrijalva/jwt-go"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/helpers"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
 )
 
 type JWTHandler struct {
@@ -81,7 +80,7 @@ func (j *JWTHandler) AddClaim(key string, value any) *JWTHandler {
 	return j
 }
 
-func (j *JWTHandler) SetSplitCookies(gCtx domain.IContext, maxAge int) error {
+func (j *JWTHandler) SetSplitCookies(gCtx contextDomain.IContext, maxAge int) error {
 
 	expirationTime := time.Now().Add(TokenTTLMinutes * time.Minute)
 	// validate Token string

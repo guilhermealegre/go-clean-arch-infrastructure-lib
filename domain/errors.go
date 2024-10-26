@@ -6,9 +6,8 @@ import (
 	"regexp"
 	"strings"
 
-	"bitbucket.org/asadventure/be-core-lib/errors"
-	"github.com/go-playground/validator/v10"
-	errorCodes "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/errors"
+	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
 )
 
 var (

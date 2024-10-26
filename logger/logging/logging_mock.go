@@ -1,9 +1,9 @@
 package logging
 
 import (
-	"bitbucket.org/asadventure/be-core-lib/errors"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/logger/config"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/logger/config"
 	"github.com/stretchr/testify/mock"
 )
 

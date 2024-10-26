@@ -2,15 +2,16 @@ package logging
 
 import (
 	"encoding/json"
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
 	"runtime/debug"
 	"strings"
 
-	"bitbucket.org/asadventure/be-core-lib/response"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/response"
 
-	"bitbucket.org/asadventure/be-core-lib/errors"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/logger/config"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/logger/writer"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/logger/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/logger/writer"
 	"github.com/rs/zerolog"
 )
 
@@ -31,6 +32,13 @@ func (l *Logging) Init(cfg config.Config) domain.ILogging {
 			}
 
 			l.Writers = append(l.Writers, writer.NewRabbit(l.RabbitMq, l.config.Path, queue, routingKey))
+		case OutputSQS:
+			var routingKey string
+			if l.config.SQS != nil {
+				routingKey = l.config.SQS.RoutingKey
+			}
+
+			l.Writers = append(l.Writers, writer.NewSQS(l.SQS, l.config.Path, l.config.SQS.Connection, l.config.SQS.Queue, routingKey))
 		}
 	}
 
@@ -59,7 +67,7 @@ func (l *Logging) Multi(err []error, info ...*domain.LoggerInfo) {
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
 	var level errors.Level
 	var msg string
-	var ctx domain.IContext
+	var ctx contextDomain.IContext
 	var responseBody string
 	var responseStatusCode int
 

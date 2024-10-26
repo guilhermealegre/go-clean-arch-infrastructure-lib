@@ -3,9 +3,9 @@ package config
 import (
 	"fmt"
 
-	"bitbucket.org/asadventure/be-core-lib/errors"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/config"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-core-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
 )
 
 // ConfigFile the configuration file

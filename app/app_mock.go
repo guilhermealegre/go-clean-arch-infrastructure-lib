@@ -1,8 +1,9 @@
 package app
 
 import (
-	appConfig "github.com/guilhermealegre/be-clean-arch-infrastructure-lib/app/config"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
+	appConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/app/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	instanceStateMachine "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/state_machine/instance"
 	"github.com/stretchr/testify/mock"
 )
 
@@ -83,6 +84,24 @@ func (a *AppMock) Rabbitmq() domain.IRabbitMQ {
 		return nil
 	}
 	return args.Get(0).(domain.IRabbitMQ)
+}
+
+// WithSQS sets the sqs service
+func (a *AppMock) WithSQS(sqs domain.ISQS) domain.IApp {
+	args := a.Called(sqs)
+	if args.Get(0) == nil {
+		return nil
+	}
+	return args.Get(0).(domain.IApp)
+}
+
+// SQS gets the sqs service
+func (a *AppMock) SQS() domain.ISQS {
+	args := a.Called()
+	if args.Get(0) == nil {
+		return nil
+	}
+	return args.Get(0).(domain.ISQS)
 }
 
 // WithRedis sets the redis service
@@ -264,13 +283,22 @@ func (a *AppMock) Datatable() domain.IDatatable {
 	return args.Get(0).(domain.IDatatable)
 }
 
+// WithStateMachine sets the state machine service
+func (a *AppMock) WithStateMachine(stateMachine instanceStateMachine.IStateMachineService) domain.IApp {
+	args := a.Called(stateMachine)
+	if args.Get(0) == nil {
+		return nil
+	}
+	return args.Get(0).(domain.IApp)
+}
+
 // StateMachine gets the state machine service
-func (a *AppMock) StateMachine() domain.IStateMachineService {
+func (a *AppMock) StateMachine() instanceStateMachine.IStateMachineService {
 	args := a.Called()
 	if args.Get(0) == nil {
 		return nil
 	}
-	return args.Get(0).(domain.IStateMachineService)
+	return args.Get(0).(instanceStateMachine.IStateMachineService)
 }
 
 // Config gets the app configurations

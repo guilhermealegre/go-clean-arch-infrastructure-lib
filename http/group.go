@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
 )
 
 // Group group struct

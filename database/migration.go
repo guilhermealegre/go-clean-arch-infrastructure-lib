@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
 
-	"github.com/guilhermealegre/be-clean-arch-infrastructure-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
 	migrate "github.com/rubenv/sql-migrate"
 )
 
@@ -49,7 +49,7 @@ func NewMigration(service string, conn *sql.DB, dialect string, disabled bool) M
 		dirs:     []string{migrationDir},
 		handler: &migrate.MigrationSet{
 			TableName:          migrationTable,
-			DisableCreateTable: false,
+			DisableCreateTable: true,
 		},
 	}
 }
