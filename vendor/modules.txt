@@ -299,7 +299,6 @@ github.com/grpc-ecosystem/grpc-gateway/v2/utilities
 ## explicit; go 1.22.7
 github.com/guilhermealegre/go-clean-arch-core-lib/database/session
 github.com/guilhermealegre/go-clean-arch-core-lib/errors
-github.com/guilhermealegre/go-clean-arch-core-lib/helpers
 github.com/guilhermealegre/go-clean-arch-core-lib/pagination
 github.com/guilhermealegre/go-clean-arch-core-lib/response
 # github.com/hashicorp/hcl v1.0.0

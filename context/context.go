@@ -52,34 +52,6 @@ func (c *Context) Response() gin.ResponseWriter {
 	return c.Context.Writer
 }
 
-func (c *Context) SetIdMarket(idMarket int) {
-	c.Context.Set(CtxIdMarket, idMarket)
-}
-
-func (c *Context) SetIdBu(idBu int) {
-	c.Context.Set(CtxIdBu, idBu)
-}
-
-func (c *Context) SetIdShop(idShop int) {
-	c.Context.Set(CtxIdShop, idShop)
-}
-
-func (c *Context) SetIdFascia(idFascia int) {
-	c.Context.Set(CtxIdFascia, idFascia)
-}
-
-func (c *Context) SetIdUserExternal(idUserExternal int) {
-	c.Context.Set(CtxIdUserExternal, idUserExternal)
-}
-
-func (c *Context) SetUsername(username string) {
-	c.Context.Set(CtxUsername, username)
-}
-
-func (c *Context) SetLanguageCode(languageCode string) {
-	c.Context.Set(CtxLanguageCode, languageCode)
-}
-
 func (c *Context) SetMethod(method string) {
 	c.Context.Set(CtxMethod, method)
 }
@@ -90,10 +62,6 @@ func (c *Context) SetPath(path string) {
 
 func (c *Context) SetBody(body []byte) {
 	c.Context.Set(CtxBody, body)
-}
-
-func (c *Context) SetAuthorizations(authorizations []string) {
-	c.Context.Set(CtxAuthorizations, authorizations)
 }
 
 func (c *Context) SetParams(params map[string]any) {
@@ -112,34 +80,6 @@ func (c *Context) getIntVal(key string) int {
 	}
 
 	return val.(int)
-}
-
-func (c *Context) GetIdMarket() int {
-	return c.getIntVal(CtxIdMarket)
-}
-
-func (c *Context) GetIdBu() int {
-	return c.getIntVal(CtxIdBu)
-}
-
-func (c *Context) GetIdShop() int {
-	return c.getIntVal(CtxIdShop)
-}
-
-func (c *Context) GetIdFascia() int {
-	return c.getIntVal(CtxIdFascia)
-}
-
-func (c *Context) GetIdUserExternal() int {
-	return c.getIntVal(CtxIdUserExternal)
-}
-
-func (c *Context) GetUsername() string {
-	return c.Context.GetString(CtxUsername)
-}
-
-func (c *Context) GetLanguageCode() string {
-	return c.Context.GetString(CtxLanguageCode)
 }
 
 func (c *Context) GetBody() []byte {
