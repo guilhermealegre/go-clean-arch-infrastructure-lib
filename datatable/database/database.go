@@ -14,7 +14,7 @@ import (
 
 	"github.com/gocraft/dbr/v2/dialect"
 	"github.com/guilhermealegre/go-clean-arch-core-lib/database/session"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 )
 
 type Database struct {

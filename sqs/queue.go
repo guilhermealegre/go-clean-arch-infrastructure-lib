@@ -3,7 +3,7 @@ package sqs
 import (
 	"fmt"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 )
 
 func (c *Connection) maskQueue(env, queue string) string {

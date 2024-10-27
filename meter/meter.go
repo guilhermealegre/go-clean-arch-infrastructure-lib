@@ -3,11 +3,11 @@ package meter
 import (
 	"context"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
-	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
-	meterConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/meter/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
+	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
+	meterConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/meter/config"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/exporters/prometheus"
 	"go.opentelemetry.io/otel/metric"

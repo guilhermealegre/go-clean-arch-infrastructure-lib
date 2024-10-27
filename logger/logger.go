@@ -5,15 +5,15 @@ import (
 	"net"
 	"os"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/logger/logging"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/logger/logging"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	loggerConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/logger/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	loggerConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/logger/config"
 )
 
 // Logger service

@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"reflect"
 
-	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/context"
 	"go.opentelemetry.io/otel/trace"
 
 	"google.golang.org/grpc/metadata"
@@ -94,22 +94,6 @@ func (c *Context) GetBody() []byte {
 
 func (c *Context) GetParams() map[string]any {
 	return c.Context.GetStringMap(CtxParams)
-}
-
-func (c *Context) GetAuthorizations() (output []string) {
-	if val, ok := c.Context.Get(CtxAuthorizations); ok && val != nil {
-		switch v := val.(type) {
-		case []string:
-			output = v
-		case []interface{}:
-			for _, item := range v {
-				if str, ok := item.(string); ok {
-					output = append(output, str)
-				}
-			}
-		}
-	}
-	return output
 }
 
 func (c *Context) GetMethod() string {

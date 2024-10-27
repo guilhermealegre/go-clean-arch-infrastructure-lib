@@ -6,12 +6,12 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
-	rabbitmqConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/rabbitmq/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
+	rabbitmqConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/rabbitmq/config"
 	"github.com/streadway/amqp"
 )
 

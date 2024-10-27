@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	contextInfra "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/context"
+	contextInfra "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/context"
 	"go.opentelemetry.io/otel/trace/noop"
 
 	"go.opentelemetry.io/otel"
@@ -18,12 +18,12 @@ import (
 	semconv "go.opentelemetry.io/otel/semconv/v1.21.0"
 	"go.opentelemetry.io/otel/trace"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
-	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
+	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	tracerConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/tracer/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	tracerConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/tracer/config"
 )
 
 // Tracer service

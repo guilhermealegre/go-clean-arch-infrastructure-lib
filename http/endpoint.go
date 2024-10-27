@@ -3,7 +3,7 @@ package http
 import (
 	"net/url"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 
 	"github.com/gin-gonic/gin"
 )

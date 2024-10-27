@@ -2,11 +2,11 @@ package aws
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	awsConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/aws/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
-	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	awsConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/aws/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
+	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 )
 
 // Aws service

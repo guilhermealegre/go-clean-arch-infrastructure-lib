@@ -1,9 +1,9 @@
 package validator
 
 import (
-	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/context"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 )
 
 // Validator

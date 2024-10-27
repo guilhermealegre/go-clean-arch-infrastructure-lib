@@ -1,8 +1,8 @@
 package elastic_search
 
 import (
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	elasticSearchConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/elastic_search/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	elasticSearchConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/elastic_search/config"
 	"github.com/stretchr/testify/mock"
 )
 

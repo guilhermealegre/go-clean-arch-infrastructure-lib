@@ -3,17 +3,17 @@ package elastic_search
 import (
 	"fmt"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/elastic_search/middlewares/tracer"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/elastic_search/middlewares/tracer"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
 
-	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 
 	"github.com/elastic/go-elasticsearch/v7/estransport"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	elasticSearchConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/elastic_search/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	elasticSearchConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/elastic_search/config"
 )
 
 // ElasticSearch elastic search

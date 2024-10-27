@@ -10,17 +10,17 @@ import (
 
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 
-	serviceWriter "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/logger/service_writer"
+	serviceWriter "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/logger/service_writer"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/grpc/interceptor"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/grpc/interceptor"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
 
-	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	grpcConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/grpc/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	grpcConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/grpc/config"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/reflection"

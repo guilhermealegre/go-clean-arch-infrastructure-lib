@@ -5,9 +5,9 @@ import (
 	"path"
 	"strings"
 
-	stateMachineDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/state_machine/instance"
+	stateMachineDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/state_machine/instance"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 )
 
 // StateMachineService service

@@ -2,18 +2,18 @@ package app
 
 import (
 	"fmt"
-	instanceStateMachine "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/state_machine/instance"
+	instanceStateMachine "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/state_machine/instance"
 	"os"
 	"os/signal"
 	"syscall"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
 
-	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 
-	appConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/app/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	appConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/app/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 )
 
 // App keeps all the tools that the lib handles

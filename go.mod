@@ -1,4 +1,4 @@
-module github.com/guilhermealegre/go-clean-arch-infrastucture-lib
+module github.com/guilhermealegre/go-clean-arch-infrastructure-lib
 
 go 1.22.7
 

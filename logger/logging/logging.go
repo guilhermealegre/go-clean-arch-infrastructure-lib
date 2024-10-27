@@ -2,16 +2,16 @@ package logging
 
 import (
 	"encoding/json"
-	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/context"
 	"runtime/debug"
 	"strings"
 
 	"github.com/guilhermealegre/go-clean-arch-core-lib/response"
 
 	"github.com/guilhermealegre/go-clean-arch-core-lib/errors"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/logger/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/logger/writer"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/logger/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/logger/writer"
 	"github.com/rs/zerolog"
 )
 

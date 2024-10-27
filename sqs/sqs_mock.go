@@ -1,8 +1,8 @@
 package sqs
 
 import (
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	sqsConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/sqs/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	sqsConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/sqs/config"
 	"github.com/stretchr/testify/mock"
 )
 

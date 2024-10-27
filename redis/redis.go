@@ -3,15 +3,15 @@ package redis
 import (
 	"fmt"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/redis/middlewares/tracer"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/redis/middlewares/tracer"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	redisConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/redis/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	redisConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/redis/config"
 )
 
 // Redis service

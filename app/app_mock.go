@@ -1,9 +1,9 @@
 package app
 
 import (
-	appConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/app/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	instanceStateMachine "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/state_machine/instance"
+	appConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/app/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	instanceStateMachine "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/state_machine/instance"
 	"github.com/stretchr/testify/mock"
 )
 

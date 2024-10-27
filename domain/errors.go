@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/guilhermealegre/go-clean-arch-core-lib/errors"
-	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 )
 
 var (

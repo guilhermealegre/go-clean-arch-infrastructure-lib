@@ -3,17 +3,17 @@ package s3
 import (
 	"context"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/s3/middlewares/tracer"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/s3/middlewares/tracer"
 
 	awsMiddleware "github.com/aws/smithy-go/middleware"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 
 	awsConfig "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	s3Config "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/s3/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	s3Config "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/s3/config"
 )
 
 // S3 service

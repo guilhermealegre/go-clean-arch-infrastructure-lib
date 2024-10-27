@@ -2,18 +2,18 @@ package domain
 
 import (
 	"context"
-	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/context"
 	"go.opentelemetry.io/otel/metric"
 	"io"
 
-	meterConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/meter/config"
+	meterConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/meter/config"
 
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/guilhermealegre/go-clean-arch-core-lib/errors"
-	s3Config "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/s3/config"
+	s3Config "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/s3/config"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/datatable/database"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/datatable/elastic_search"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/datatable/database"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/datatable/elastic_search"
 
 	"github.com/guilhermealegre/go-clean-arch-core-lib/database/session"
 
@@ -21,17 +21,17 @@ import (
 	"github.com/aws/aws-sdk-go/service/sqs"
 	"github.com/gin-gonic/gin"
 	msg "github.com/guilhermealegre/go-clean-arch-core-lib/pagination"
-	appConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/app/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/database/config"
-	elasticSearchConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/elastic_search/config"
-	grpcConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/grpc/config"
-	httpConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/http/config"
-	loggerConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/logger/config"
-	rabbitmqConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/rabbitmq/config"
-	redisConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/redis/config"
-	sqsConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/sqs/config"
-	stateMachineDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/state_machine/instance"
-	tracerConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/tracer/config"
+	appConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/app/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/database/config"
+	elasticSearchConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/elastic_search/config"
+	grpcConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/grpc/config"
+	httpConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/http/config"
+	loggerConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/logger/config"
+	rabbitmqConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/rabbitmq/config"
+	redisConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/redis/config"
+	sqsConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/sqs/config"
+	stateMachineDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/state_machine/instance"
+	tracerConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/tracer/config"
 	"github.com/streadway/amqp"
 	"google.golang.org/grpc"
 )

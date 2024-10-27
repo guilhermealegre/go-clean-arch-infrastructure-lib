@@ -2,16 +2,17 @@ package database
 
 import (
 	"fmt"
+	"github.com/gocraft/dbr/v2"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/database/middlewares/tracer"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/database/middlewares/tracer"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
 
 	"github.com/guilhermealegre/go-clean-arch-core-lib/database/session"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
-	databaseConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/database/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/config"
+	databaseConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/database/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 )
 
 // Database has the database information

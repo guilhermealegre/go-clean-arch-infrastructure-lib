@@ -1,9 +1,9 @@
 package datatable
 
 import (
-	dtDatabase "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/datatable/database"
-	dtElastic "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/datatable/elastic_search"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	dtDatabase "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/datatable/database"
+	dtElastic "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/datatable/elastic_search"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 	"github.com/stretchr/testify/mock"
 )
 

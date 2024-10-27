@@ -3,7 +3,7 @@ package domain
 import (
 	"encoding/json"
 	"errors"
-	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/context"
 
 	coreErrors "github.com/guilhermealegre/go-clean-arch-core-lib/errors"
 	"github.com/guilhermealegre/go-clean-arch-core-lib/response"

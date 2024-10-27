@@ -1,8 +1,8 @@
 package validator
 
 import (
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/context"
 	"github.com/stretchr/testify/mock"
 )
 

@@ -6,7 +6,7 @@ import (
 	"os"
 	"path"
 
-	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 )
 
 // File

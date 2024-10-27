@@ -1,8 +1,8 @@
 package state_machine
 
 import (
-	domain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	stateMachineDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/state_machine/instance"
+	domain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	stateMachineDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/state_machine/instance"
 	"github.com/stretchr/testify/mock"
 )
 

@@ -5,7 +5,7 @@ import (
 	"io"
 
 	"github.com/gin-gonic/gin"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/context"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/context"
 )
 
 // loadRequestInfo loads the request information to domain context

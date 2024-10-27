@@ -2,8 +2,8 @@ package s3
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	s3Config "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/s3/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	s3Config "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/s3/config"
 	"github.com/stretchr/testify/mock"
 )
 

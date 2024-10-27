@@ -92,24 +92,8 @@ type IContext interface {
 	Keys() map[string]any
 	Request() *http.Request
 	Response() gin.ResponseWriter
-	SetIdMarket(int)
-	SetIdBu(int)
-	SetIdShop(int)
-	SetIdFascia(int)
-	SetIdUserExternal(int)
-	SetUsername(string)
-	SetLanguageCode(string)
 	SetBody([]byte)
-	SetAuthorizations([]string)
-	GetIdMarket() int
-	GetIdBu() int
-	GetIdShop() int
-	GetIdFascia() int
-	GetIdUserExternal() int
-	GetUsername() string
-	GetLanguageCode() string
 	GetBody() []byte
-	GetAuthorizations() []string
 	Abort()
 	AddMeta(meta any) IContext
 	AddPagination(pagination *msg.Pagination) IContext

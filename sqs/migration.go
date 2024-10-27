@@ -4,16 +4,16 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/sqs/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/sqs/config"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
 
 	awsSdk "github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	sqsSdk "github.com/aws/aws-sdk-go/service/sqs"
-	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	errorCodes "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 )
 
 const (

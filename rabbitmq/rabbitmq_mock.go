@@ -1,8 +1,8 @@
 package rabbitmq
 
 import (
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	rabbitmqConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/rabbitmq/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	rabbitmqConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/rabbitmq/config"
 	"github.com/streadway/amqp"
 	"github.com/stretchr/testify/mock"
 )

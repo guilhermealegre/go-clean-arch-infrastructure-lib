@@ -1,11 +1,11 @@
 package datatable
 
 import (
-	databaseConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/database/config"
-	datatableConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/datatable/config"
-	dtDatabase "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/datatable/database"
-	dtElastic "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/datatable/elastic_search"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	databaseConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/database/config"
+	datatableConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/datatable/config"
+	dtDatabase "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/datatable/database"
+	dtElastic "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/datatable/elastic_search"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 )
 
 type Datatable struct {

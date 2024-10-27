@@ -1,8 +1,8 @@
 package grpc
 
 import (
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	grpcConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/grpc/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	grpcConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/grpc/config"
 	"github.com/stretchr/testify/mock"
 	"google.golang.org/grpc"
 )

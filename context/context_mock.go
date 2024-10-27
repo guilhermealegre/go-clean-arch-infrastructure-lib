@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/context"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
@@ -470,75 +470,8 @@ func (c *ContextMock) SetSameSite(site http.SameSite) {
 	c.Called(site)
 }
 
-func (c *ContextMock) SetIdMarket(i int) {
-	c.Called(i)
-}
-
-func (c *ContextMock) SetIdBu(i int) {
-	c.Called(i)
-}
-
-func (c *ContextMock) SetIdShop(i int) {
-	c.Called(i)
-}
-
-func (c *ContextMock) SetIdFascia(i int) {
-	c.Called(i)
-}
-
-func (c *ContextMock) GetIdMarket() int {
-	args := c.Called()
-	return args.Get(0).(int)
-}
-
-func (c *ContextMock) GetIdBu() int {
-	args := c.Called()
-	return args.Get(0).(int)
-}
-
-func (c *ContextMock) GetIdShop() int {
-	args := c.Called()
-	return args.Get(0).(int)
-}
-
-func (c *ContextMock) GetIdFascia() int {
-	args := c.Called()
-	return args.Get(0).(int)
-}
-
-func (c *ContextMock) SetIdUserExternal(i int) {
-	c.Called(i)
-}
-
-func (c *ContextMock) SetUsername(s string) {
-	c.Called(s)
-}
-
-func (c *ContextMock) SetLanguageCode(s string) {
-	c.Called(s)
-}
-
 func (c *ContextMock) SetBody(b []byte) {
 	c.Called(b)
-}
-
-func (c *ContextMock) SetAuthorizations(s []string) {
-	c.Called(s)
-}
-
-func (c *ContextMock) GetIdUserExternal() int {
-	args := c.Called()
-	return args.Get(0).(int)
-}
-
-func (c *ContextMock) GetUsername() string {
-	args := c.Called()
-	return args.Get(0).(string)
-}
-
-func (c *ContextMock) GetLanguageCode() string {
-	args := c.Called()
-	return args.Get(0).(string)
 }
 
 func (c *ContextMock) GetBody() []byte {
@@ -547,14 +480,6 @@ func (c *ContextMock) GetBody() []byte {
 		return nil
 	}
 	return args.Get(0).([]byte)
-}
-
-func (c *ContextMock) GetAuthorizations() []string {
-	args := c.Called()
-	if args.Get(0) == nil {
-		return nil
-	}
-	return args.Get(0).([]string)
 }
 
 func (c *ContextMock) AddMeta(meta interface{}) contextDomain.IContext {

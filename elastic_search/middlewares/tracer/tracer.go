@@ -6,15 +6,15 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 
-	errorsInfra "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
-	httpInfra "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/http"
+	errorsInfra "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
+	httpInfra "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/http"
 
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/propagation"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/tracer"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/tracer"
 
 	"github.com/elastic/go-elasticsearch/v7/estransport"
 )

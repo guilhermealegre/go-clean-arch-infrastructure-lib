@@ -3,9 +3,9 @@ package sqs
 import (
 	"github.com/aws/aws-sdk-go/service/sqs"
 	sqsSdk "github.com/aws/aws-sdk-go/service/sqs"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	sqsConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/sqs/config"
-	middlewares "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/sqs/middlewares"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	sqsConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/sqs/config"
+	middlewares "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/sqs/middlewares"
 )
 
 // SQS service

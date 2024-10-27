@@ -9,18 +9,18 @@ import (
 	"net/url"
 	"sync"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/sqs/middlewares/tracer"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/sqs/middlewares/tracer"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/sqs/middlewares"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/sqs/middlewares"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sqs"
 	"github.com/google/uuid"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 )
 
 // Connect connects the sqs

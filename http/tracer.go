@@ -2,8 +2,8 @@ package http
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/context"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/tracer"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/context"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/tracer"
 )
 
 // traceRequest traces the request information

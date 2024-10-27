@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/sqs/middlewares"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/sqs/middlewares"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 
 	"github.com/aws/aws-sdk-go/service/sqs"
 )

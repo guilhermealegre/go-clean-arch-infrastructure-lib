@@ -5,8 +5,8 @@ import (
 	"regexp"
 	"strings"
 
-	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/context"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/context"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 	"github.com/spf13/viper"
 )
 

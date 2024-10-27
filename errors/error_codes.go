@@ -2,7 +2,7 @@ package errors
 
 import (
 	"github.com/guilhermealegre/go-clean-arch-core-lib/errors"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors/config"
 )
 
 // Error codes

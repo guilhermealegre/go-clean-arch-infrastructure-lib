@@ -2,8 +2,8 @@ package database
 
 import (
 	"github.com/guilhermealegre/go-clean-arch-core-lib/database/session"
-	databaseConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/database/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	databaseConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/database/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 	"github.com/stretchr/testify/mock"
 )
 

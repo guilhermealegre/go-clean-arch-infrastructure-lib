@@ -2,10 +2,11 @@ package tracer
 
 import (
 	"context"
+	"github.com/gocraft/dbr/v2"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/tracer"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/tracer"
 )
 
 // tracerMiddleware is an EventReceiver that traces queries

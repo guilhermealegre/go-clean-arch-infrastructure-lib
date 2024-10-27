@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/guilhermealegre/go-clean-arch-core-lib/errors"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
 )
 
 // ConfigFile the configuration file

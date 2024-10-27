@@ -1,4 +1,4 @@
-## be-infrastruture-lib
+## go-clean-arch-infrastructure-lib
 **This is the repository that that has the backend projects infrastructure**
 
 To install pre-commit in a service:

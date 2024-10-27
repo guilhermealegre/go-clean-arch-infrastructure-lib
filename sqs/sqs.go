@@ -3,12 +3,12 @@ package sqs
 import (
 	"fmt"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain/message"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
 
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/config"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/domain"
-	"github.com/guilhermealegre/go-clean-arch-infrastucture-lib/errors"
-	sqsConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/sqs/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/config"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
+	sqsConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/sqs/config"
 )
 
 const (

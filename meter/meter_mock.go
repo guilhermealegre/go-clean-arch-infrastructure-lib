@@ -1,7 +1,7 @@
 package meter
 
 import (
-	meterConfig "github.com/guilhermealegre/go-clean-arch-infrastucture-lib/meter/config"
+	meterConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/meter/config"
 	"github.com/stretchr/testify/mock"
 	"go.opentelemetry.io/otel/metric"
 )
