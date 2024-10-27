@@ -122,7 +122,6 @@ func (s *S3) withMiddlewares(apiOptions []func(*awsMiddleware.Stack) error,
 			return stack.Initialize.Add(middleware, awsMiddleware.Before)
 		})
 	}
-
 	return apiOptions
 }
 
