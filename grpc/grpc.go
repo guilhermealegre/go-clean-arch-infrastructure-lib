@@ -247,7 +247,7 @@ func (g *Grpc) InitClients() (err error) {
 	}
 
 	for _, clientConfig := range g.Config().Clients {
-		newClient, err := grpc.Dial(
+		newClient, err := grpc.NewClient(
 			g.getClientUrl(clientConfig.Name),
 			grpc.WithTransportCredentials(insecure.NewCredentials()),
 			grpc.WithStatsHandler(otelgrpc.NewClientHandler()),

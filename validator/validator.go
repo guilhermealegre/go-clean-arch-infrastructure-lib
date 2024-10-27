@@ -1,6 +1,7 @@
 package validator
 
 import (
+	"github.com/go-playground/validator/v10"
 	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/context"
 
 	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"

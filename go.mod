@@ -13,8 +13,9 @@ require (
 	github.com/go-playground/validator/v10 v10.22.1
 	github.com/gocraft/dbr/v2 v2.7.7
 	github.com/google/uuid v1.6.0
-	github.com/guilhermealegre/go-clean-arch-core-lib v0.0.0-20241027160143-649c02e59edd
+	github.com/guilhermealegre/go-clean-arch-core-lib v0.0.0-20241027200540-0fd34797cc18
 	github.com/prometheus/client_golang v1.20.5
+	github.com/redis/go-redis/v9 v9.7.0
 	github.com/rs/zerolog v1.33.0
 	github.com/rubenv/sql-migrate v1.7.0
 	github.com/spf13/viper v1.19.0
@@ -56,6 +57,7 @@ require (
 	github.com/cloudwego/base64x v0.1.4 // indirect
 	github.com/cloudwego/iasm v0.2.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
+	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.5 // indirect

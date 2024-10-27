@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
-	"reflect"
 
 	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/context"
 	"go.opentelemetry.io/otel/trace"
@@ -66,20 +65,6 @@ func (c *Context) SetBody(body []byte) {
 
 func (c *Context) SetParams(params map[string]any) {
 	c.Context.Set(CtxParams, params)
-}
-
-func (c *Context) getIntVal(key string) int {
-	val, ok := c.Context.Get(key)
-	if !ok {
-		return 0
-	}
-
-	//json unmarshals int numbers as float64, which is problematic in grpc requests
-	if reflect.ValueOf(val).Kind() == reflect.Float64 {
-		return int(val.(float64))
-	}
-
-	return val.(int)
 }
 
 func (c *Context) GetBody() []byte {

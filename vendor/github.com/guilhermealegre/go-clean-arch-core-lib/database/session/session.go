@@ -46,7 +46,7 @@ func (s *Session) BeginTx(ctx context.Context, opts *sql.TxOptions) (ITx, error)
 	return newTx(tx), nil
 }
 
-func (s *Session) Select(column ...string) *dbr.SelectBuilder {
+func (s *Session) Select(column ...any) *dbr.SelectBuilder {
 	return s.conn.Select(column...)
 }
 

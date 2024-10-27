@@ -3,6 +3,8 @@ package domain
 import (
 	"encoding/json"
 	"errors"
+
+	"github.com/go-playground/validator/v10"
 	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/context"
 
 	coreErrors "github.com/guilhermealegre/go-clean-arch-core-lib/errors"

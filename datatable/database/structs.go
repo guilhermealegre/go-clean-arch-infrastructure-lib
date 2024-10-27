@@ -4,6 +4,8 @@ import (
 	"context"
 	"net/url"
 
+	"github.com/gocraft/dbr/v2"
+
 	"github.com/guilhermealegre/go-clean-arch-core-lib/database/session"
 )
 
@@ -43,7 +45,7 @@ type FilterDatabaseList []FilterDatabase
 type FilterDatabase struct {
 	FilterName        string                 // [required] filter name
 	Table             interface{}            // [required] table name
-	ShowFields        []string               // [required] fields to show on the filter list
+	ShowFields        []any                  // [required] fields to show on the filter list
 	FilterField       string                 // [required] filter by column name
 	Join              FilterJoinDatabaseList // [optional] join with other table
 	NullLabel         string                 // [optional] set null label default value as None

@@ -67,6 +67,5 @@ func NewErrorDetails(code string, msg string, level Level, opts ...Opt) ErrorDet
 			}
 		}
 	}
-
 	return errorDetails
 }

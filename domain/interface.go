@@ -2,9 +2,13 @@ package domain
 
 import (
 	"context"
-	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/context"
-	"go.opentelemetry.io/otel/metric"
 	"io"
+
+	"github.com/elastic/go-elasticsearch/v7"
+	"github.com/go-playground/validator/v10"
+	contextDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/context"
+	"github.com/redis/go-redis/v9"
+	"go.opentelemetry.io/otel/metric"
 
 	meterConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/meter/config"
 

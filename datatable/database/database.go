@@ -10,6 +10,8 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/gocraft/dbr/v2"
+
 	"github.com/guilhermealegre/go-clean-arch-core-lib/pagination"
 
 	"github.com/gocraft/dbr/v2/dialect"

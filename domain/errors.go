@@ -3,6 +3,8 @@ package domain
 import (
 	"unicode"
 
+	"github.com/go-playground/validator/v10"
+
 	"regexp"
 	"strings"
 

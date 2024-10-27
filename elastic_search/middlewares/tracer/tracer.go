@@ -6,6 +6,8 @@ import (
 	"io"
 	"net/http"
 
+	"github.com/elastic/go-elasticsearch/v7"
+
 	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 
 	errorsInfra "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"

@@ -1,6 +1,7 @@
 package elastic_search
 
 import (
+	"github.com/elastic/go-elasticsearch/v7"
 	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 	elasticSearchConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/elastic_search/config"
 	"github.com/stretchr/testify/mock"

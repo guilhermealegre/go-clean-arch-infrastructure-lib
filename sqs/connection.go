@@ -193,7 +193,7 @@ func (c *Connection) getHandlerFunc(message *sqs.Message, maskedQueue string, ha
 	}
 
 	return func(context.Context, *sqs.Message) bool {
-		c.app.Logger().Log().Do(fmt.Errorf(fmt.Sprintf("failed to handle message from queue %s: handler is nil", maskedQueue)))
+		c.app.Logger().Log().Do(fmt.Errorf("failed to handle message from queue %s: handler is nil", maskedQueue))
 		return false
 	}
 }

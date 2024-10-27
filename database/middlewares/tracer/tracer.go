@@ -2,12 +2,15 @@ package tracer
 
 import (
 	"context"
+
 	"github.com/gocraft/dbr/v2"
 
 	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 
 	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/tracer"
 )
+
+const tracerTagTraver = tracer.TracerTagTracer
 
 // tracerMiddleware is an EventReceiver that traces queries
 type tracerMiddleware struct {
@@ -36,7 +39,6 @@ func (t *tracerMiddleware) SpanStart(ctx context.Context, eventName string, quer
 			tracer.TracerTagQuery:     query,
 		},
 	}
-
 	return context.WithValue(ctx, tracer.TracerTagTracer, attrs)
 }
 

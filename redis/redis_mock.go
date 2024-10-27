@@ -3,6 +3,7 @@ package redis
 import (
 	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 	redisConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/redis/config"
+	"github.com/redis/go-redis/v9"
 	"github.com/stretchr/testify/mock"
 )
 

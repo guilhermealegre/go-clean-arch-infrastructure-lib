@@ -11,6 +11,7 @@ import (
 
 	"github.com/elastic/go-elasticsearch/v7/estransport"
 
+	"github.com/elastic/go-elasticsearch/v7"
 	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/config"
 	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
 	elasticSearchConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/elastic_search/config"
