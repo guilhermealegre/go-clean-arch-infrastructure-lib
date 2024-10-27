@@ -295,7 +295,7 @@ github.com/google/uuid
 github.com/grpc-ecosystem/grpc-gateway/v2/internal/httprule
 github.com/grpc-ecosystem/grpc-gateway/v2/runtime
 github.com/grpc-ecosystem/grpc-gateway/v2/utilities
-# github.com/guilhermealegre/go-clean-arch-core-lib v0.0.0-20241026152815-21ff556a9396
+# github.com/guilhermealegre/go-clean-arch-core-lib v0.0.0-20241027160143-649c02e59edd
 ## explicit; go 1.22.7
 github.com/guilhermealegre/go-clean-arch-core-lib/database/session
 github.com/guilhermealegre/go-clean-arch-core-lib/errors

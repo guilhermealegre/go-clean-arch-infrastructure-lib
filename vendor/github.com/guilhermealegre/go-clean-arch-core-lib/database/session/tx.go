@@ -12,7 +12,7 @@ type ITx interface {
 	Commit() error
 	Rollback() error
 	RollbackUnlessCommitted()
-	Select(column ...string) *dbr.SelectBuilder
+	Select(column ...any) *dbr.SelectBuilder
 	SelectBySql(query string, value ...interface{}) *dbr.SelectBuilder
 	InsertInto(table string) *dbr.InsertBuilder
 	InsertBySql(query string, value ...interface{}) *dbr.InsertBuilder
@@ -52,7 +52,7 @@ func (t *Tx) RollbackUnlessCommitted() {
 	t.Tx().RollbackUnlessCommitted()
 }
 
-func (t *Tx) Select(column ...string) *dbr.SelectBuilder {
+func (t *Tx) Select(column ...any) *dbr.SelectBuilder {
 	return t.Tx().Select(column...)
 }
 

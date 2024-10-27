@@ -13,7 +13,7 @@ require (
 	github.com/go-playground/validator/v10 v10.22.1
 	github.com/gocraft/dbr/v2 v2.7.7
 	github.com/google/uuid v1.6.0
-	github.com/guilhermealegre/go-clean-arch-core-lib v0.0.0-20241026152815-21ff556a9396
+	github.com/guilhermealegre/go-clean-arch-core-lib v0.0.0-20241027160143-649c02e59edd
 	github.com/prometheus/client_golang v1.20.5
 	github.com/rs/zerolog v1.33.0
 	github.com/rubenv/sql-migrate v1.7.0

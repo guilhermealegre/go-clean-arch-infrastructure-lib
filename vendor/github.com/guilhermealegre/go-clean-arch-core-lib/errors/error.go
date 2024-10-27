@@ -1,12 +1,13 @@
 package errors
 
 import (
+	"errors"
 	"fmt"
 )
 
 // IsEmpty verify if has any error
 func (e ErrorDetails) IsEmpty() bool {
-	return e == ErrorDetails{}
+	return errors.Is(e, ErrorDetails{})
 }
 
 // Formats formats an error message
