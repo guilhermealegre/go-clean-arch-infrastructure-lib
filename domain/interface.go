@@ -36,7 +36,7 @@ import (
 	sqsConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/sqs/config"
 	stateMachineDomain "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/state_machine/instance"
 	tracerConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/tracer/config"
-	"github.com/streadway/amqp"
+	amqp "github.com/rabbitmq/amqp091-go"
 	"google.golang.org/grpc"
 )
 

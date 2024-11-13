@@ -10,7 +10,7 @@ import (
 	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/tracer"
 )
 
-const tracerTagTraver = tracer.TracerTagTracer
+//const tracerTagTraver = tracer.TracerTagTracer
 
 // tracerMiddleware is an EventReceiver that traces queries
 type tracerMiddleware struct {

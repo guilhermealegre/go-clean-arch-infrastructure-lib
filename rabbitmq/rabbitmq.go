@@ -5,14 +5,15 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-
-	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
+	"os"
+	"path"
 
 	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/config"
 	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain"
+	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/domain/message"
 	"github.com/guilhermealegre/go-clean-arch-infrastructure-lib/errors"
 	rabbitmqConfig "github.com/guilhermealegre/go-clean-arch-infrastructure-lib/rabbitmq/config"
-	"github.com/streadway/amqp"
+	amqp "github.com/rabbitmq/amqp091-go"
 )
 
 // Rabbitmq service
@@ -74,6 +75,7 @@ func (r *Rabbitmq) Start() (err error) {
 	if r.config == nil {
 		r.config = &rabbitmqConfig.Config{}
 		r.config.AdditionalConfig = r.additionalConfigType
+		// load the configuration file
 		if err = config.Load(r.ConfigFile(), r.config); err != nil {
 			err = errors.ErrorLoadingConfigFile().Formats(r.ConfigFile(), err)
 			message.ErrorMessage(r.Name(), err)
@@ -83,6 +85,12 @@ func (r *Rabbitmq) Start() (err error) {
 
 	r.Connect()
 
+	if err = r.runMigration(); err != nil {
+		message.ErrorMessage(r.Name(), err)
+		return err
+	}
+
+	//load the migration file
 	for _, handler := range r.consumers {
 		r.Consume(r.app, handler.GetQueue(), handler.GetHandlers())
 	}
@@ -232,4 +240,53 @@ func (r *Rabbitmq) WithAdditionalConfigType(obj interface{}) domain.IRabbitMQ {
 // Started true if started
 func (r *Rabbitmq) Started() bool {
 	return r.started
+}
+
+func (r *Rabbitmq) runMigration() error {
+
+	dir := "./migrations/rabbitmq"
+	files, err := os.ReadDir(dir)
+	if err != nil {
+		return err
+	}
+
+	var rabbitMQConfig RabbitMQConfig
+	for _, file := range files {
+		var fileRabbitMQConfig RabbitMQConfig
+		readDir, err := os.ReadFile(path.Join(dir, file.Name()))
+		if err != nil {
+			return err
+		}
+
+		err = json.Unmarshal(readDir, &fileRabbitMQConfig)
+		if err != nil {
+			return err
+		}
+
+		rabbitMQConfig.Exchanges = append(rabbitMQConfig.Exchanges, fileRabbitMQConfig.Exchanges...)
+		rabbitMQConfig.Queues = append(rabbitMQConfig.Queues, fileRabbitMQConfig.Queues...)
+		rabbitMQConfig.Bindings = append(rabbitMQConfig.Bindings, fileRabbitMQConfig.Bindings...)
+	}
+
+	for _, ex := range rabbitMQConfig.Exchanges {
+		if err := r.consumerChannel.ExchangeDeclare(ex.Name, ex.Type, ex.Durable, false, false, false, nil); err != nil {
+			return err
+		}
+	}
+
+	// Declare queues
+	for _, q := range rabbitMQConfig.Queues {
+		if _, err := r.consumerChannel.QueueDeclare(q.Name, q.Durable, false, false, false, nil); err != nil {
+			return err
+		}
+	}
+
+	// Bind queues to exchanges
+	for _, b := range rabbitMQConfig.Bindings {
+		if err := r.consumerChannel.QueueBind(b.Destination, b.RoutingKey, b.Source, false, nil); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
