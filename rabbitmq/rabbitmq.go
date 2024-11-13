@@ -210,7 +210,10 @@ func (r *Rabbitmq) handlerFunc(message amqp.Delivery, handlers map[string]func(m
 			}
 		}
 	}
-	return nil
+
+	return func(amqp.Delivery) bool {
+		return false
+	}
 }
 
 // recover recovers from a panic during message consumption
