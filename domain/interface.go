@@ -215,7 +215,7 @@ type IRabbitMQ interface {
 	Config() *rabbitmqConfig.Config
 
 	// Produce produces to the rabbitmq
-	Produce(message string, exchange string, routingKey string) error
+	Produce(message any, exchange string, routingKey string) error
 	// Consume consumes from the rabbitmq
 	Consume(app IApp, queues string, handlers map[string]func(msg amqp.Delivery) bool)
 	// WithConsumer adds a consumer to the rabbitmq
