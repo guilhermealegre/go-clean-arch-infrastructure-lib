@@ -90,7 +90,9 @@ func (m *Migration) Run() []error {
 
 // getMigrationsToRun migration list to be applied
 func (m *Migration) getMigrationsToRun(conn *sql.DB, src migrate.MigrationSource) ([]*migrate.PlannedMigration, error) {
-	migSet := &migrate.MigrationSet{}
+	migSet := &migrate.MigrationSet{
+		TableName: m.handler.TableName,
+	}
 	toRun, _, err := migSet.PlanMigration(conn, m.dialect, src, migrate.Up, 0)
 	return toRun, err
 }
