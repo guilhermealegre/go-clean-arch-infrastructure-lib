@@ -146,15 +146,19 @@ func (r *Rabbitmq) ConfigFile() string {
 }
 
 // Produce produces to the rabbitmq
-func (r *Rabbitmq) Produce(message string, exchange, routingKey string) error {
-	err := r.producerChannel.Publish(
+func (r *Rabbitmq) Produce(message any, exchange, routingKey string) error {
+	bytesMessage, err := json.Marshal(message)
+	if err != nil {
+		return err
+	}
+	err = r.producerChannel.Publish(
 		exchange,   // Name of the exchange
 		routingKey, // Routing key
 		false,      // Mandatory: Return message if it cannot be routed
 		false,      // Immediate: Return message if it cannot be delivered immediately
 		amqp.Publishing{
 			ContentType: "text/plain",
-			Body:        []byte(message),
+			Body:        bytesMessage,
 		},
 	)
 	if err != nil {
