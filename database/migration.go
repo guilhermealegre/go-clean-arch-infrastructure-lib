@@ -49,7 +49,7 @@ func NewMigration(service string, conn *sql.DB, dialect string, disabled bool) M
 		dirs:     []string{migrationDir},
 		handler: &migrate.MigrationSet{
 			TableName:          migrationTable,
-			DisableCreateTable: true,
+			DisableCreateTable: false,
 		},
 	}
 }
